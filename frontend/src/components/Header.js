@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import {
   Container,
   Navbar,
@@ -13,16 +14,22 @@ const Header = () => {
     <header>
       <Navbar collapseOnSelect bg="light" variant="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">Todo List</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand href="/">Todo List</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/create">
-                <i className="fas fa-plus-circle"></i> Create
-              </Nav.Link>
-              <Nav.Link href="/completed">
-                <i className="fas fa-check-circle"></i> Completed
-              </Nav.Link>
+              <LinkContainer to="/create">
+                <Nav.Link>
+                  <i className="fas fa-plus-circle"></i> Create
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/completed">
+                <Nav.Link>
+                  <i className="fas fa-check-circle"></i> Completed
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
             <Form inline>
               <FormControl

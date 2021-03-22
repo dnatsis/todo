@@ -1,0 +1,19 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "MERN stack todo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnatsis/todo.git"
+  },
+  "author": "Dhimitris Natsis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnatsis/todo/issues"
+  },
+  "homepage": "https://github.com/dnatsis/todo#readme"
+}
