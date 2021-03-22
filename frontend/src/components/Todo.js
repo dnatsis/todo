@@ -8,10 +8,10 @@ const Todo = (props) => {
   return (
     <tbody>
       <tr>
-        <td>{currIndex}</td>
-        <td>{todo.name}</td>
-        <td>{todo.description}</td>
-        <td>{todo.priority}</td>
+        <td key={todo._id}>{currIndex}</td>
+        <td key={todo._id + 1}>{todo.name}</td>
+        <td key={todo._id + 2}>{todo.description}</td>
+        <td key={todo._id + 3}>{todo.priority}</td>
       </tr>
     </tbody>
   );

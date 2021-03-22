@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Row, Container, Table } from 'react-bootstrap';
-import todos from '../todos';
 import Todo from '../components/Todo';
 
 const HomeScreen = () => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const { data } = await axios.get('/api/todos');
+
+      setTodos(data);
+    };
+
+    fetchTodos();
+  }, []);
+
   return (
     <>
       <h1>Current Todos</h1>
