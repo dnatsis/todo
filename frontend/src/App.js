@@ -4,6 +4,8 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
+import CreateScreen from './screens/CreateScreen';
+import TodoScreen from './screens/TodoScreen';
 
 const App = () => {
   return (
@@ -11,7 +13,9 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
-          <Route to="/" component={HomeScreen} exact />
+          <Route path="/create" component={CreateScreen} />
+          <Route path="/todo/:id" component={TodoScreen} />
+          <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />
