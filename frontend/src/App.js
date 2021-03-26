@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import CreateScreen from './screens/CreateScreen';
 import TodoScreen from './screens/TodoScreen';
+import EditScreen from './screens/EditScreen';
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/create" component={CreateScreen} />
-          <Route path="/todo/:id" component={TodoScreen} />
+          <Route path="/todo/:id" component={TodoScreen} exact />
+          <Route path="/todo/:id/edit" component={EditScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

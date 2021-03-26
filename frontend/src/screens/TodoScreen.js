@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const TodoScreen = ({ match, history }) => {
@@ -15,6 +16,9 @@ const TodoScreen = ({ match, history }) => {
   }, [match]);
   return (
     <div>
+      <Link className="btn btn-secondary my-3" to="/">
+        Go Back
+      </Link>
       <h1>{todo.name}</h1>
       <p>{todo.description}</p>
     </div>
