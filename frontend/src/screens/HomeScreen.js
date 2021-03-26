@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Row, Container, Table, Button } from 'react-bootstrap';
+import { listTodos } from '../actions/todoActions';
 
 const HomeScreen = () => {
-  const [todos, setTodos] = useState([]);
+  const dispatch = useDispatch();
+
+  const todoList = useSelector((state) => state.todoList);
+  const { loading, error, todos } = todoList;
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      const { data } = await axios.get('/api/todos');
-
-      setTodos(data);
-    };
-
-    fetchTodos();
-  }, []);
+    dispatch(listTodos());
+  }, [dispatch]);
 
   const deleteHandler = (id) => {
     console.log('doesnt matter');
