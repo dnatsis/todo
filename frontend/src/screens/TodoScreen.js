@@ -12,7 +12,7 @@ const TodoScreen = ({ match, history }) => {
     };
 
     fetchTodo();
-  }, []);
+  }, [match]);
   return (
     <div>
       <h1>{todo.name}</h1>
