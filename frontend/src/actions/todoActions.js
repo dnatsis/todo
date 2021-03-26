@@ -1,4 +1,7 @@
 import {
+  TODO_DETAILS_FAIL,
+  TODO_DETAILS_REQUEST,
+  TODO_DETAILS_SUCCESS,
   TODO_LIST_FAIL,
   TODO_LIST_REQUEST,
   TODO_LIST_SUCCESS,
@@ -18,6 +21,27 @@ export const listTodos = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TODO_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listTodoDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/todos/${id}`);
+
+    dispatch({
+      type: TODO_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: TODO_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

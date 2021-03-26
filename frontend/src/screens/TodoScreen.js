@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listTodoDetails } from '../actions/todoActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const TodoScreen = ({ match, history }) => {
-  const [todo, setTodo] = useState([]);
+  const dispatch = useDispatch();
+
+  const todoDetails = useSelector((state) => state.todoDetails);
+  const { loading, error, todo } = todoDetails;
 
   useEffect(() => {
-    const fetchTodo = async () => {
-      const { data } = await axios.get(`/api/todos/${match.params.id}`);
+    dispatch(listTodoDetails(match.params.id));
+  }, [dispatch, match]);
 
-      setTodo(data);
-    };
-
-    fetchTodo();
-  }, [match]);
   return (
-    <div>
+    <>
       <Link className="btn btn-secondary my-3" to="/">
         Go Back
       </Link>
-      <h1>{todo.name}</h1>
-      <p>{todo.description}</p>
-    </div>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <>
+          <h1>{todo.name}</h1>
+          <p>{todo.description}</p>
+        </>
+      )}
+    </>
   );
 };
 
