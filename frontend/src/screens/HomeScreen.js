@@ -4,25 +4,32 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Row, Container, Table, Button } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listTodos } from '../actions/todoActions';
+import { listTodos, deleteTodo } from '../actions/todoActions';
 
-const HomeScreen = () => {
+const HomeScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const todoList = useSelector((state) => state.todoList);
   const { loading, error, todos } = todoList;
 
+  const todoDelete = useSelector((state) => state.todoDelete);
+  const { loading: loadingDelete, error: errorDelete, success } = todoDelete;
+
   useEffect(() => {
+    if (success) {
+      history.push('/');
+    }
     dispatch(listTodos());
-  }, [dispatch]);
+  }, [dispatch, success, history]);
 
   const deleteHandler = (id) => {
-    console.log('doesnt matter');
+    dispatch(deleteTodo(id));
   };
 
   return (
     <>
       <h1>Current Todos</h1>
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (

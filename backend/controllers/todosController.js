@@ -40,4 +40,19 @@ const createTodo = asyncHandler(async (req, res) => {
   res.status(201).json(createdTodo);
 });
 
-export { getTodos, getTodoById, createTodo };
+// @desc Delete a Todo
+// @route DELETE /api/todos/:id
+// @access Public
+const deleteTodo = asyncHandler(async (req, res) => {
+  const todo = await Todos.findById(req.params.id);
+
+  if (todo) {
+    await todo.remove();
+    res.json({ message: 'Todo Removed!' });
+  } else {
+    res.status(404);
+    throw new Error('Todo not found!');
+  }
+});
+
+export { getTodos, getTodoById, createTodo, deleteTodo };

@@ -2,6 +2,9 @@ import {
   TODO_CREATE_FAIL,
   TODO_CREATE_REQUEST,
   TODO_CREATE_SUCCESS,
+  TODO_DELETE_FAIL,
+  TODO_DELETE_REQUEST,
+  TODO_DELETE_SUCCESS,
   TODO_DETAILS_FAIL,
   TODO_DETAILS_REQUEST,
   TODO_DETAILS_SUCCESS,
@@ -72,6 +75,26 @@ export const createTodo = (todo) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TODO_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteTodo = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_DELETE_REQUEST });
+
+    await axios.delete(`/api/todos/${id}`);
+
+    dispatch({
+      type: TODO_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: TODO_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

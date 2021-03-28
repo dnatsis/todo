@@ -5,12 +5,14 @@ import {
   todoListReducer,
   todoDetailsReducer,
   todoCreateReducer,
+  todoDeleteReducer,
 } from './reducers/todoReducers';
 
 const reducer = combineReducers({
   todoList: todoListReducer,
   todoDetails: todoDetailsReducer,
   todoCreate: todoCreateReducer,
+  todoDelete: todoDeleteReducer,
 });
 
 const initialState = {};
