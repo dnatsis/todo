@@ -1,11 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { todoListReducer, todoDetailsReducer } from './reducers/todoReducers';
+import {
+  todoListReducer,
+  todoDetailsReducer,
+  todoCreateReducer,
+} from './reducers/todoReducers';
 
 const reducer = combineReducers({
   todoList: todoListReducer,
   todoDetails: todoDetailsReducer,
+  todoCreate: todoCreateReducer,
 });
 
 const initialState = {};

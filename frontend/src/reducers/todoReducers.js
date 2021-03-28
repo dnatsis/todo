@@ -1,4 +1,8 @@
 import {
+  TODO_CREATE_FAIL,
+  TODO_CREATE_REQUEST,
+  TODO_CREATE_RESET,
+  TODO_CREATE_SUCCESS,
   TODO_DETAILS_FAIL,
   TODO_DETAILS_REQUEST,
   TODO_DETAILS_SUCCESS,
@@ -20,14 +24,29 @@ export const todoListReducer = (state = { todos: [] }, action) => {
   }
 };
 
-export const todoDetailsReducer = (state = { todo: [] }, action) => {
+export const todoDetailsReducer = (state = { todo: {} }, action) => {
   switch (action.type) {
     case TODO_DETAILS_REQUEST:
-      return { loading: true, todo: [] };
+      return { loading: true, todo: {} };
     case TODO_DETAILS_SUCCESS:
       return { loading: false, todo: action.payload };
     case TODO_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const todoCreateReducer = (state = { todo: {} }, action) => {
+  switch (action.type) {
+    case TODO_CREATE_REQUEST:
+      return { loading: true, todo: {} };
+    case TODO_CREATE_SUCCESS:
+      return { loading: false, success: true, todo: action.payload };
+    case TODO_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case TODO_CREATE_RESET:
+      return { todo: {} };
     default:
       return state;
   }
