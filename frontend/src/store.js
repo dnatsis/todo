@@ -6,6 +6,7 @@ import {
   todoDetailsReducer,
   todoCreateReducer,
   todoDeleteReducer,
+  todoCompleteReducer,
 } from './reducers/todoReducers';
 
 const reducer = combineReducers({
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   todoDetails: todoDetailsReducer,
   todoCreate: todoCreateReducer,
   todoDelete: todoDeleteReducer,
+  todoCompleted: todoCompleteReducer,
 });
 
 const initialState = {};

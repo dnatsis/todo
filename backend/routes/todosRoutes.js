@@ -5,9 +5,10 @@ import {
   getTodoById,
   createTodo,
   deleteTodo,
+  completeTodo,
 } from '../controllers/todosController.js';
 
 router.route('/').get(getTodos).post(createTodo);
-router.route('/:id').get(getTodoById).delete(deleteTodo);
+router.route('/:id').get(getTodoById).delete(deleteTodo).put(completeTodo);
 
 export default router;

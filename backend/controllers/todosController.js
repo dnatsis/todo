@@ -55,4 +55,21 @@ const deleteTodo = asyncHandler(async (req, res) => {
   }
 });
 
-export { getTodos, getTodoById, createTodo, deleteTodo };
+// @desc Update a todo as Completed
+// @route PUT /api/todos/:id
+// @access Public
+const completeTodo = asyncHandler(async (req, res) => {
+  const todo = await Todos.findById(req.params.id);
+
+  if (todo) {
+    todo.finished = true;
+    const completedTodo = await todo.save();
+
+    res.json(completedTodo);
+  } else {
+    res.status(404);
+    throw new Error('Todo not found!');
+  }
+});
+
+export { getTodos, getTodoById, createTodo, deleteTodo, completeTodo };

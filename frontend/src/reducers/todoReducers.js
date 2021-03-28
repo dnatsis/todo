@@ -1,4 +1,7 @@
 import {
+  TODO_COMPLETE_FAIL,
+  TODO_COMPLETE_REQUEST,
+  TODO_COMPLETE_SUCCESS,
   TODO_CREATE_FAIL,
   TODO_CREATE_REQUEST,
   TODO_CREATE_RESET,
@@ -62,6 +65,19 @@ export const todoDeleteReducer = (state = {}, action) => {
     case TODO_DELETE_SUCCESS:
       return { loading: false, success: true };
     case TODO_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const todoCompleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TODO_COMPLETE_REQUEST:
+      return { loading: true };
+    case TODO_COMPLETE_SUCCESS:
+      return { loading: false, success: true };
+    case TODO_COMPLETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
