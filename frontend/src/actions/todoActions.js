@@ -1,4 +1,7 @@
 import {
+  TODO_COMPLETED_CREATE_FAIL,
+  TODO_COMPLETED_CREATE_REQUEST,
+  TODO_COMPLETED_CREATE_SUCCESS,
   TODO_COMPLETE_FAIL,
   TODO_COMPLETE_REQUEST,
   TODO_COMPLETE_SUCCESS,
@@ -11,6 +14,9 @@ import {
   TODO_DETAILS_FAIL,
   TODO_DETAILS_REQUEST,
   TODO_DETAILS_SUCCESS,
+  TODO_LIST_COMPLETED_FAIL,
+  TODO_LIST_COMPLETED_REQUEST,
+  TODO_LIST_COMPLETED_SUCCESS,
   TODO_LIST_FAIL,
   TODO_LIST_REQUEST,
   TODO_LIST_SUCCESS,
@@ -118,6 +124,54 @@ export const completeTodo = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TODO_COMPLETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createCompletedTodo = (todo) => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_COMPLETED_CREATE_REQUEST });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(`/api/todos/completed`, todo, config);
+
+    dispatch({
+      type: TODO_COMPLETED_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: TODO_COMPLETED_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listCompletedTodos = () => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_LIST_COMPLETED_REQUEST });
+
+    const { data } = await axios.get('/api/todos/completed');
+
+    dispatch({
+      type: TODO_LIST_COMPLETED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: TODO_LIST_COMPLETED_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import todos from './data/todos.js';
-import Todos from './models/todosModel.js';
+import TodosCompleted from './models/todosCompletedModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
@@ -10,9 +10,9 @@ connectDB();
 
 const importData = async () => {
   try {
-    await Todos.deleteMany();
+    await TodosCompleted.deleteMany();
 
-    await Todos.insertMany(todos);
+    await TodosCompleted.insertMany(todos);
 
     console.log('data import');
     process.exit();
@@ -24,7 +24,7 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    await Todos.deleteMany();
+    await TodosCompleted.deleteMany();
 
     console.log('data destroyed');
     process.exit();

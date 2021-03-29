@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Todos from '../models/todosModel.js';
+import TodosCompleted from '../models/todosCompletedModel.js';
 
 // @desc Fetch all todos
 // @route GET /api/todos
@@ -72,4 +73,38 @@ const completeTodo = asyncHandler(async (req, res) => {
   }
 });
 
-export { getTodos, getTodoById, createTodo, deleteTodo, completeTodo };
+// @desc Create a New Completed Todo
+// @route POST /api/todos/completed
+// @access Public
+const createCompletedTodo = asyncHandler(async (req, res) => {
+  const { name, description, priority, finished } = req.body;
+
+  const todo = new TodosCompleted({
+    name: name,
+    description: description,
+    priority: priority,
+    finished: finished,
+  });
+
+  const createdCompletedTodo = await todo.save();
+  res.status(201).json(createdCompletedTodo);
+});
+
+// @desc Fetch all todos that are Completed
+// @route GET /api/todos/completed
+// @access public
+const getTodosCompleted = asyncHandler(async (req, res) => {
+  const todos = await TodosCompleted.find({});
+
+  res.json(todos);
+});
+
+export {
+  getTodos,
+  getTodoById,
+  createTodo,
+  deleteTodo,
+  completeTodo,
+  createCompletedTodo,
+  getTodosCompleted,
+};

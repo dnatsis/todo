@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import CreateScreen from './screens/CreateScreen';
 import TodoScreen from './screens/TodoScreen';
 import EditScreen from './screens/EditScreen';
+import CompletedScreen from './screens/CompletedScreen';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/create" component={CreateScreen} />
+          <Route path="/completed" component={CompletedScreen} />
           <Route path="/todo/:id" component={TodoScreen} exact />
           <Route path="/todo/:id/edit" component={EditScreen} />
           <Route path="/" component={HomeScreen} exact />
