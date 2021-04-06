@@ -99,6 +99,28 @@ const getTodosCompleted = asyncHandler(async (req, res) => {
   res.json(todos);
 });
 
+// @desc Update a Todo
+// @route PUT /api/todos/:id/edit
+// @access Public
+const updateTodo = asyncHandler(async (req, res) => {
+  const { name, description, priority, finished } = req.body;
+
+  const todo = await Todos.findById(req.params.id);
+
+  if (todo) {
+    todo.name = name;
+    todo.description = description;
+    todo.priority = priority;
+    todo.finished = false;
+
+    const updatedTodo = await todo.save();
+    res.json(updatedTodo);
+  } else {
+    res.status(404);
+    throw new Error('Todo not found');
+  }
+});
+
 export {
   getTodos,
   getTodoById,
@@ -107,4 +129,5 @@ export {
   completeTodo,
   createCompletedTodo,
   getTodosCompleted,
+  updateTodo,
 };
