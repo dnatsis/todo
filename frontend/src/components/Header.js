@@ -30,6 +30,11 @@ const Header = () => {
                   <i className="fas fa-check-circle"></i> Completed
                 </Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/pomodoro">
+                <Nav.Link>
+                  <i className="fas fa-clock"></i> Pomodoro
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
             <Form inline>
               <FormControl
