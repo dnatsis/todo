@@ -20,6 +20,9 @@ import {
   TODO_LIST_FAIL,
   TODO_LIST_REQUEST,
   TODO_LIST_SUCCESS,
+  TODO_UPDATE_FAIL,
+  TODO_UPDATE_REQUEST,
+  TODO_UPDATE_SUCCESS,
 } from '../constants/todoConstants';
 import axios from 'axios';
 
@@ -124,6 +127,32 @@ export const completeTodo = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TODO_COMPLETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateTodo = (id, todo) => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_UPDATE_REQUEST });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    await axios.put(`/api/todos/${id}/edit`, todo, config);
+
+    dispatch({
+      type: TODO_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: TODO_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -22,6 +22,10 @@ import {
   TODO_LIST_FAIL,
   TODO_LIST_REQUEST,
   TODO_LIST_SUCCESS,
+  TODO_UPDATE_FAIL,
+  TODO_UPDATE_REQUEST,
+  TODO_UPDATE_RESET,
+  TODO_UPDATE_SUCCESS,
 } from '../constants/todoConstants';
 
 export const todoListReducer = (state = { todos: [] }, action) => {
@@ -59,6 +63,21 @@ export const todoCreateReducer = (state = { todo: {} }, action) => {
     case TODO_CREATE_FAIL:
       return { loading: false, error: action.payload };
     case TODO_CREATE_RESET:
+      return { todo: {} };
+    default:
+      return state;
+  }
+};
+
+export const todoUpdateReducer = (state = { todo: {} }, action) => {
+  switch (action.type) {
+    case TODO_UPDATE_REQUEST:
+      return { loading: true, todo: {} };
+    case TODO_UPDATE_SUCCESS:
+      return { loading: false, success: true, todo: action.payload };
+    case TODO_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case TODO_UPDATE_RESET:
       return { todo: {} };
     default:
       return state;

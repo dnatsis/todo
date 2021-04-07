@@ -111,7 +111,7 @@ const updateTodo = asyncHandler(async (req, res) => {
     todo.name = name;
     todo.description = description;
     todo.priority = priority;
-    todo.finished = false;
+    todo.finished = finished;
 
     const updatedTodo = await todo.save();
     res.json(updatedTodo);
