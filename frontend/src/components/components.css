@@ -20,6 +20,11 @@
   height: auto;
   display: inline-block;
 }
+.divider-bott {
+  width: auto;
+  height: 10px;
+  display: inline-block;
+}
 
 button {
   margin: 5px;
@@ -28,4 +33,9 @@ button {
 
 .session-clock {
   text-align: center;
+}
+
+.controlTodo {
+  display: inline-flex;
+  padding-left: 5px;
 }
