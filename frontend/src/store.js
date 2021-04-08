@@ -12,6 +12,11 @@ import {
   todoUpdateReducer,
 } from './reducers/todoReducers';
 
+import {
+  pomodoroBreakTimeReducer,
+  pomodoroSessionTimeReducer,
+} from './reducers/pomodoroReducers';
+
 const reducer = combineReducers({
   todoList: todoListReducer,
   todoDetails: todoDetailsReducer,
@@ -21,6 +26,8 @@ const reducer = combineReducers({
   todoCompletedCreate: todoCompletedCreateReducer,
   todoListCompleted: todoListCompletedReducer,
   todoUpdate: todoUpdateReducer,
+  pomodoroBreakTime: pomodoroBreakTimeReducer,
+  pomodoroSessionTime: pomodoroSessionTimeReducer,
 });
 
 const initialState = {};

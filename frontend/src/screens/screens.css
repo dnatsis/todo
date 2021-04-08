@@ -1,0 +1,11 @@
+.pomodorodiv {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.inlinediv {
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+}

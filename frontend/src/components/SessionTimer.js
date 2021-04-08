@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { sessionTimer } from '../actions/pomodoroActions';
 import './components.css';
 
 const SessionTimer = () => {
@@ -20,6 +22,12 @@ const SessionTimer = () => {
   const sessionLengthInMinutes = moment
     .duration(sessionLengthInSeconds, 's')
     .minutes();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sessionTimer(sessionLengthInSeconds));
+  }, [dispatch, sessionLengthInSeconds]);
 
   return (
     <div className="sessiondiv">
