@@ -37,6 +37,7 @@ const BreakTimer = () => {
       <button className="break-increment" onClick={incrementBreakByOneMinute}>
         <i className="fas fa-plus"></i>
       </button>
+      <div className="divider" />
       <button className="break-decrement" onClick={decrementBreakByOneMinute}>
         <i className="fas fa-minus"></i>
       </button>

@@ -40,6 +40,7 @@ const SessionTimer = () => {
       >
         <i className="fas fa-plus"></i>
       </button>
+      <div className="divider" />
       <button
         className="session-decrement"
         onClick={decrementSessionByOneMinute}

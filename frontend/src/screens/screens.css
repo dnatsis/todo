@@ -9,3 +9,11 @@
   justify-content: center;
   align-content: center;
 }
+
+.pomodoro-clock-div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 5rem;
+  padding: 10px;
+}
