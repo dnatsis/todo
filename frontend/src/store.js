@@ -10,6 +10,7 @@ import {
   todoCompletedCreateReducer,
   todoListCompletedReducer,
   todoUpdateReducer,
+  todoDeleteCompletedReducer,
 } from './reducers/todoReducers';
 
 import {
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   todoDelete: todoDeleteReducer,
   todoCompleted: todoCompleteReducer,
   todoCompletedCreate: todoCompletedCreateReducer,
+  todoDeleteCompleted: todoDeleteCompletedReducer,
   todoListCompleted: todoListCompletedReducer,
   todoUpdate: todoUpdateReducer,
   pomodoroBreakTime: pomodoroBreakTimeReducer,

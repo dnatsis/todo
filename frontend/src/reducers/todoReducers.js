@@ -10,6 +10,9 @@ import {
   TODO_CREATE_REQUEST,
   TODO_CREATE_RESET,
   TODO_CREATE_SUCCESS,
+  TODO_DELETE_COMPLETED_FAIL,
+  TODO_DELETE_COMPLETED_REQUEST,
+  TODO_DELETE_COMPLETED_SUCCESS,
   TODO_DELETE_FAIL,
   TODO_DELETE_REQUEST,
   TODO_DELETE_SUCCESS,
@@ -120,6 +123,19 @@ export const todoCompletedCreateReducer = (state = { todo: {} }, action) => {
       return { loading: false, error: action.payload };
     case TODO_COMPLETED_CREATE_RESET:
       return { todo: {} };
+    default:
+      return state;
+  }
+};
+
+export const todoDeleteCompletedReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TODO_DELETE_COMPLETED_REQUEST:
+      return { loading: true };
+    case TODO_DELETE_COMPLETED_SUCCESS:
+      return { loading: false, success: true };
+    case TODO_DELETE_COMPLETED_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

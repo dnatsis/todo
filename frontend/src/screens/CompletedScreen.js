@@ -4,7 +4,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Row, Container, Table, Button } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listCompletedTodos } from '../actions/todoActions';
+import {
+  listCompletedTodos,
+  deleteCompletedTodo,
+} from '../actions/todoActions';
 
 const CompletedScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -12,12 +15,18 @@ const CompletedScreen = ({ history }) => {
   const todoListCompleted = useSelector((state) => state.todoListCompleted);
   const { loading, error, todos } = todoListCompleted;
 
+  const todoDeleteCompleted = useSelector((state) => state.todoDeleteCompleted);
+  const { success } = todoDeleteCompleted;
+
   useEffect(() => {
+    if (success) {
+      history.push('/completed');
+    }
     dispatch(listCompletedTodos());
-  }, [dispatch]);
+  }, [dispatch, history, success]);
 
   const deleteHandler = (id) => {
-    console.log('doesnt matter');
+    dispatch(deleteCompletedTodo(id));
   };
 
   return (
@@ -43,29 +52,27 @@ const CompletedScreen = ({ history }) => {
               </thead>
               <tbody>
                 {todos.map((todo) => (
-                  <>
-                    <tr key={todo._id}>
-                      <td>{todo._id}</td>
-                      <LinkContainer
-                        style={{ cursor: 'pointer' }}
-                        to={`/todo/${todo._id}`}
+                  <tr key={todo._id}>
+                    <td>{todo._id}</td>
+                    <LinkContainer
+                      style={{ cursor: 'pointer' }}
+                      to={`/todo/${todo._id}`}
+                    >
+                      <td>{todo.name}</td>
+                    </LinkContainer>
+                    <td>{todo.description}</td>
+                    <td>{todo.priority}</td>
+                    <td>{todo.sessions}</td>
+                    <td style={{ display: 'flex' }}>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(todo._id)}
                       >
-                        <td>{todo.name}</td>
-                      </LinkContainer>
-                      <td>{todo.description}</td>
-                      <td>{todo.priority}</td>
-                      <td>{todo.sessions}</td>
-                      <td style={{ display: 'flex' }}>
-                        <Button
-                          variant="danger"
-                          className="btn-sm"
-                          onClick={() => deleteHandler(todo._id)}
-                        >
-                          <i className="fas fa-trash"></i>
-                        </Button>
-                      </td>
-                    </tr>
-                  </>
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </Table>

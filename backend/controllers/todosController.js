@@ -101,6 +101,21 @@ const getTodosCompleted = asyncHandler(async (req, res) => {
   res.json(todos);
 });
 
+// @desc Delete a Completed Todo
+// @route DELETE /api/todos/completed/:id
+// @access Public
+const deleteCompletedTodo = asyncHandler(async (req, res) => {
+  const todo = await TodosCompleted.findById(req.params.id);
+
+  if (todo) {
+    await todo.remove();
+    res.json({ message: 'Todo Removed!' });
+  } else {
+    res.status(404);
+    throw new Error('Todo not found!');
+  }
+});
+
 // @desc Update a Todo
 // @route PUT /api/todos/:id/edit
 // @access Public
@@ -133,4 +148,5 @@ export {
   createCompletedTodo,
   getTodosCompleted,
   updateTodo,
+  deleteCompletedTodo,
 };
