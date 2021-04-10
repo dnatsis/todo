@@ -28,13 +28,14 @@ const getTodoById = asyncHandler(async (req, res) => {
 // @route POST /api/todos
 // @access Public
 const createTodo = asyncHandler(async (req, res) => {
-  const { name, description, priority, finished } = req.body;
+  const { name, description, priority, finished, sessions } = req.body;
 
   const todo = new Todos({
     name: name,
     description: description,
     priority: priority,
     finished: finished,
+    sessions: sessions,
   });
 
   const createdTodo = await todo.save();
@@ -77,13 +78,14 @@ const completeTodo = asyncHandler(async (req, res) => {
 // @route POST /api/todos/completed
 // @access Public
 const createCompletedTodo = asyncHandler(async (req, res) => {
-  const { name, description, priority, finished } = req.body;
+  const { name, description, priority, finished, sessions } = req.body;
 
   const todo = new TodosCompleted({
     name: name,
     description: description,
     priority: priority,
     finished: finished,
+    sessions: sessions,
   });
 
   const createdCompletedTodo = await todo.save();
@@ -103,7 +105,7 @@ const getTodosCompleted = asyncHandler(async (req, res) => {
 // @route PUT /api/todos/:id/edit
 // @access Public
 const updateTodo = asyncHandler(async (req, res) => {
-  const { name, description, priority, finished } = req.body;
+  const { name, description, priority, finished, sessions } = req.body;
 
   const todo = await Todos.findById(req.params.id);
 
@@ -112,6 +114,7 @@ const updateTodo = asyncHandler(async (req, res) => {
     todo.description = description;
     todo.priority = priority;
     todo.finished = finished;
+    todo.sessions = sessions;
 
     const updatedTodo = await todo.save();
     res.json(updatedTodo);

@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useDispatch, useSelector } from 'react-redux';
 import './components.css';
+import Loader from '../components/Loader';
 import { Container } from 'react-bootstrap';
 import { listTodos } from '../actions/todoActions';
 
@@ -19,7 +20,7 @@ const PomodoroClock = () => {
   const { breakTimer } = pomodoroBreakTime;
 
   const todoList = useSelector((state) => state.todoList);
-  const { todos } = todoList;
+  const { todos, loading } = todoList;
 
   const [currentSessionType, setCurrentSessionType] = useState('Session');
   const [timeLeft, setTimeLeft] = useState(sessionTimer);
@@ -67,6 +68,7 @@ const PomodoroClock = () => {
 
   return (
     <div>
+      {loading && <Loader />}
       <Container>
         <Form.Group controlId="todoNames" className="controlTodo">
           <Form.Label>Todos</Form.Label>

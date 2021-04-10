@@ -46,6 +46,7 @@ const HomeScreen = ({ history }) => {
       description: todo.description,
       priority: todo.priority,
       finished: todo.finished,
+      sessions: todo.sessions,
     };
     dispatch(createCompletedTodo(todoCompleted));
 
@@ -70,6 +71,7 @@ const HomeScreen = ({ history }) => {
                   <th>NAME</th>
                   <th>DESCRIPTION</th>
                   <th>PRIORITY</th>
+                  <th>SESSIONS</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -86,6 +88,7 @@ const HomeScreen = ({ history }) => {
                     </LinkContainer>
                     <td>{todo.description}</td>
                     <td>{todo.priority}</td>
+                    <td>{todo.sessions}</td>
                     <td style={{ display: 'flex' }}>
                       <LinkContainer to={`/todo/${todo._id}/edit`}>
                         <Button variant="light" className="btn-sm">

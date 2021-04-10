@@ -17,6 +17,10 @@ const todosSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    sessions: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

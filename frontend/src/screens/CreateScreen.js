@@ -31,6 +31,7 @@ const CreateScreen = ({ history }) => {
       description: description,
       priority: priority,
       finished: finished,
+      sessions: 0,
     };
 
     dispatch(createTodo(todo));

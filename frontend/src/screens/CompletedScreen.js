@@ -37,6 +37,7 @@ const CompletedScreen = ({ history }) => {
                   <th>NAME</th>
                   <th>DESCRIPTION</th>
                   <th>PRIORITY</th>
+                  <th>SESSIONS</th>
                   <th></th>
                 </tr>
               </thead>
@@ -53,6 +54,7 @@ const CompletedScreen = ({ history }) => {
                       </LinkContainer>
                       <td>{todo.description}</td>
                       <td>{todo.priority}</td>
+                      <td>{todo.sessions}</td>
                       <td style={{ display: 'flex' }}>
                         <Button
                           variant="danger"
