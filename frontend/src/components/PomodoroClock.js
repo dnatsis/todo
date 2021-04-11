@@ -4,9 +4,8 @@ import { Form } from 'react-bootstrap';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useDispatch, useSelector } from 'react-redux';
 import './components.css';
-import Loader from '../components/Loader';
 import { Container } from 'react-bootstrap';
-import { listTodos } from '../actions/todoActions';
+import { listTodos, updateTodo, listTodoDetails } from '../actions/todoActions';
 
 momentDurationFormatSetup(moment);
 
@@ -20,19 +19,40 @@ const PomodoroClock = () => {
   const { breakTimer } = pomodoroBreakTime;
 
   const todoList = useSelector((state) => state.todoList);
-  const { todos, loading } = todoList;
+  const { todos } = todoList;
+
+  const todoDetails = useSelector((state) => state.todoDetails);
+  const { todo } = todoDetails;
 
   const [currentSessionType, setCurrentSessionType] = useState('Session');
   const [timeLeft, setTimeLeft] = useState(sessionTimer);
   const [intervalId, setIntervalId] = useState(null);
-  const [todoName, setTodoName] = useState('');
+  const [todoId, setTodoId] = useState('');
 
   useEffect(() => {
     setTimeLeft(sessionTimer);
     dispatch(listTodos());
   }, [sessionTimer, dispatch]);
 
+  useEffect(() => {
+    dispatch(listTodoDetails(todoId));
+  }, [dispatch, todoId]);
+
   const isStarted = intervalId != null;
+
+  const getTodoByIdAndUpdateSessions = (id) => {
+    const updatedTodo = {
+      name: todo.name,
+      description: todo.description,
+      priority: todo.priority,
+      finished: todo.finished,
+      sessions: todo.sessions + 1,
+    };
+    console.log(id);
+    console.log(updatedTodo);
+
+    dispatch(updateTodo(id, updatedTodo));
+  };
 
   const handleStartClick = () => {
     if (isStarted) {
@@ -46,11 +66,12 @@ const PomodoroClock = () => {
             return prevTimeLeft - 1;
           }
           if (currentSessionType === 'Session') {
+            getTodoByIdAndUpdateSessions(todoId);
             setCurrentSessionType('Break');
             setTimeLeft(breakTimer);
           }
         });
-      }, 1000);
+      }, 100);
       setIntervalId(newIntervalId);
     }
   };
@@ -62,23 +83,25 @@ const PomodoroClock = () => {
     setTimeLeft(sessionTimer);
   };
 
+  const onChangeHandler = (e) => {
+    setTodoId(e.target.value);
+  };
+
   const formattedTimeLeft = moment
     .duration(timeLeft, 's')
     .format('mm:ss', { trim: false });
 
   return (
     <div>
-      {loading && <Loader />}
       <Container>
         <Form.Group controlId="todoNames" className="controlTodo">
           <Form.Label>Todos</Form.Label>
-          <Form.Control
-            as="select"
-            value={todoName}
-            onChange={(e) => setTodoName(e.target.value)}
-          >
+          <Form.Control as="select" onChange={onChangeHandler}>
+            <option value="">Other</option>
             {todos.map((todo) => (
-              <option>{todo.name}</option>
+              <option key={todo._id} value={todo._id}>
+                {todo.name}
+              </option>
             ))}
           </Form.Control>
         </Form.Group>
