@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import './components.css';
+import { Container } from 'react-bootstrap';
 import { breakTimer } from '../actions/pomodoroActions';
 
 const BreakTimer = () => {
@@ -30,18 +31,20 @@ const BreakTimer = () => {
   }, [dispatch, breakLengthInSeconds]);
 
   return (
-    <div className="breakdiv">
-      <p className="break-label">Break</p>
+    <Container>
+      <div className="breakdiv">
+        <p className="break-label">Break</p>
 
-      <p className="break-length">{breakLengthInMinutes}</p>
-      <button className="break-increment" onClick={incrementBreakByOneMinute}>
-        <i className="fas fa-plus"></i>
-      </button>
-      <div className="divider" />
-      <button className="break-decrement" onClick={decrementBreakByOneMinute}>
-        <i className="fas fa-minus"></i>
-      </button>
-    </div>
+        <p className="break-length">{breakLengthInMinutes}</p>
+        <button className="break-increment" onClick={incrementBreakByOneMinute}>
+          <i className="fas fa-plus"></i>
+        </button>
+        <div className="divider" />
+        <button className="break-decrement" onClick={decrementBreakByOneMinute}>
+          <i className="fas fa-minus"></i>
+        </button>
+      </div>
+    </Container>
   );
 };
 

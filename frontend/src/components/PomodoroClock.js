@@ -96,6 +96,7 @@ const PomodoroClock = () => {
       <Container>
         <Form.Group controlId="todoNames" className="controlTodo">
           <Form.Label>Todos</Form.Label>
+          <div className="divider" />
           <Form.Control as="select" onChange={onChangeHandler}>
             <option value="">Other</option>
             {todos.map((todo) => (

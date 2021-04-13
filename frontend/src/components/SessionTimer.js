@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { Container } from 'react-bootstrap';
 import { sessionTimer } from '../actions/pomodoroActions';
 import './components.css';
 
@@ -30,24 +31,26 @@ const SessionTimer = () => {
   }, [dispatch, sessionLengthInSeconds]);
 
   return (
-    <div className="sessiondiv">
-      <p className="session-label">Session</p>
+    <Container>
+      <div className="sessiondiv">
+        <p className="session-label">Session</p>
 
-      <p className="session-length">{sessionLengthInMinutes}</p>
-      <button
-        className="session-increment"
-        onClick={incrementSessionByOneMinute}
-      >
-        <i className="fas fa-plus"></i>
-      </button>
-      <div className="divider" />
-      <button
-        className="session-decrement"
-        onClick={decrementSessionByOneMinute}
-      >
-        <i className="fas fa-minus"></i>
-      </button>
-    </div>
+        <p className="session-length">{sessionLengthInMinutes}</p>
+        <button
+          className="session-increment"
+          onClick={incrementSessionByOneMinute}
+        >
+          <i className="fas fa-plus"></i>
+        </button>
+        <div className="divider" />
+        <button
+          className="session-decrement"
+          onClick={decrementSessionByOneMinute}
+        >
+          <i className="fas fa-minus"></i>
+        </button>
+      </div>
+    </Container>
   );
 };
 
