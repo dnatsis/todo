@@ -71,7 +71,7 @@ const PomodoroClock = () => {
             setTimeLeft(breakTimer);
           }
         });
-      }, 100);
+      }, 1000);
       setIntervalId(newIntervalId);
     }
   };
